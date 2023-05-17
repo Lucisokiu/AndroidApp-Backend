@@ -9,7 +9,6 @@ const Follow = async(req, res) => {
         const followid = await get(Ref);    
         if(followid.val() == null)
         {
-          // res.status(404).send("null");
           res.status(404).send(followid);
 
         }else{
@@ -31,10 +30,6 @@ const Following = async(req, res) => {
       const followingid = await get(Ref);    
       if(followingid != null)
       {
-        // Object.keys(followingid.val()).map((key) => {
-        //   a.push(followingid.val());
-        // })
-        // res.status(404).send("null");
         for ( let i in followingid.val())
         {
           a.push(i);

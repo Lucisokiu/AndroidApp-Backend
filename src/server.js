@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-// const admin = require('./config/db.config')
 const router = require('./routers/root.router');
 
 // cho phép url encoded
@@ -16,5 +15,5 @@ const PORT = 3000;
 
 app.listen(PORT,() =>
 {
-    console.log(`Example app listening at https://localhost:${PORT}`);
+    console.log(`Example app listening at http://localhost:${PORT}`);
 });

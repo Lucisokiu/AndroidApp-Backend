@@ -7,11 +7,10 @@ const Login = async (req, res) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     const { user } = userCredential;
     res.status(200).send(user);
-    // res.status(200).send(user.email);
     }
     catch (error) {
       
-    console.error(error); // log the error for debugging purposes
+    console.error(error); 
     res.status(404).send("Login failed: " + error.message);
   }
 };

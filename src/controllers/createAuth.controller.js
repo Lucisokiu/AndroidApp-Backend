@@ -10,20 +10,18 @@ const createAuth = async (req, res) => {
       email,
       password
     );
-    // const { user } = userCredential;
-    // res.status(200).send(userCredential);
+
     console.log(`User created with email ${userCredential.user.email} and uid ${userCredential.user.uid}`);
 
 
     const uid = userCredential.user.uid;
-// (name, member, email, password,user_id)
-// PostUser => thêm User
+
     const newUser = await PostNewUser(name,member,email,password,uid);
     console.log(newUser);
     res.status(201).json({ message: "User created successfully " });
 
     }catch (error) {
-    console.error(error); // log the error for debugging purposes
+    console.error(error);
     res.status(500).send("create failed: " + error.message);
   }
 };

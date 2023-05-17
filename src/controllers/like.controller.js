@@ -7,7 +7,6 @@ const isLike = async ( req, res ) => {
     try{
     const Ref = ref(database, `/Likes/${postid}`);
     const like = await get(Ref);
-    // res.status(200).send({like});
     
     const arr = []
     for ( let i in like.val())
