@@ -25,7 +25,7 @@ const addLike = async (req, res) => {
   const {uid, postid} = req.body;
   const Ref = ref(database, `/Likes/${postid}/${uid}`);
   await set(Ref, true);
-  res.status(200).send("Likes added!!!");
+  res.status(200).send(`"Likes added!!!"`);
   }catch(error){
     res.status(404).send(error);
   }

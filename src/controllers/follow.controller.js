@@ -30,9 +30,9 @@ const Following = async(req, res) => {
       const followingid = await get(Ref);    
       if(followingid != null)
       {
-        for ( let i in followingid.val())
+        for ( let id in followingid.val())
         {
-          a.push(i);
+          a.push({id});
         }
         res.status(200).send(a);
 

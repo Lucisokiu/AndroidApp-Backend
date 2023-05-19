@@ -3,16 +3,21 @@ const { database } = require('../config/db.config');
 
 const getComment = async (req,res) => {
     try {
-        const postid = req.body
+      const {postid} = req.body
+
         const Ref = ref(database, `/Comments/${postid}`);
         const comments = await get(Ref);
         const arr = []
         for ( let i in comments.val())
         {
+          console.log(comments.val()[i])
           arr.push(comments.val()[i]);
         }
+
         res.status(200).send(arr);
     }catch(error){
+      console.log(error)
+      res.status(404).send(error);
 
     }
 }

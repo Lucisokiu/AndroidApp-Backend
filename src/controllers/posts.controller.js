@@ -39,7 +39,8 @@ const Post = async(req, res) => {
 
 const PostDetail = async(req, res) => {
   try {
-    const Ref = ref(database, `/Posts/${req.body.idpost}`);
+    const { postid } = req.body;
+    const Ref = ref(database, `/Posts/${postid}`);
     const post = await get(Ref);
     res.status(200).send(post);
     
@@ -63,7 +64,8 @@ const PostCount = async (req,res) => {
     const Ref = ref(database, `/Posts/`);
     const post = await get(Ref);
     const counterPost = Object.keys(post.val()).length;
-    res.status(200).send({counterPost});
+
+    res.status(200).send(`${counterPost}`);
   } catch (error) {
   console.error(error);
   res.status(404).send("Error fetching Post from database");
@@ -90,6 +92,8 @@ const NewPost = async (req,res) => {
     };
     await set(Ref, newpost);
   res.status(200).send("Post added!!!");
+  console.log("Post added!!!")
+
   }catch(error){
     res.status(404).send(error);
     console.log(error);

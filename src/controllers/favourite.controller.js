@@ -1,4 +1,4 @@
-const { ref, get } = require("firebase/database");
+const { ref, get, set } = require("firebase/database");
 const { database } = require("../config/db.config");
 
 
@@ -11,15 +11,17 @@ const favourite = async (req,res) => {
         const favorite_id = await get(Ref);
         if(favorite_id.val() == null)
         {
-            res.status(404).send(favorite_id);
+            res.status(200).send(favorite_id);
         }else{
-    
             const arr = []
-            for ( let i in favorite_id.val())
+            for ( let idposts in favorite_id.val())
             {
-              arr.push(i);
+              const Refpost = ref(database, `Posts`);
+              const post = await get(Refpost);
+              arr.push(post.val()[idposts]);
             }
-            res.status(200).send(arr);        }
+            res.status(200).send(arr);        
+          }
     }catch(error)
     {
         res.status(404).send(error);
@@ -33,6 +35,7 @@ const addFavor = async (req,res) => {
     await set(Ref, true);
     res.status(200).send("Favorite added!!!");
     }catch(error){
+      console.log(error);
       res.status(404).send(error);
     }
 

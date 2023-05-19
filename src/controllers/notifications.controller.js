@@ -4,18 +4,32 @@ const { database } = require('../config/db.config');
 
 const addNotifi = async(req, res) => {
     try{
-    const {uid, userid,comment,postid,ispost } = req.body
+    const {uid, userid,comment,postid } = req.body
     var keyid = push(ref(database)).key;
-    const Ref = ref(database, `/Posts/${uid}/${keyid}`);
+    const Ref = ref(database, `/Notifications/${uid}/${keyid}`);
+    if(postid != null)
+    {
     const newNotifi = {
         comment:comment,
-        ispost:ispost,
+        ispost:true,
         postid:postid,
         userid:userid,
 
     }
     await set(Ref, newNotifi);
-    res.status(201).send("Post added!!!");
+}else{
+        const newNotifi = {
+        comment:comment,
+        ispost:false,
+        postid:postid,
+        userid:userid,
+
+    }
+    await set(Ref, newNotifi);
+}
+    console.log("Notifi added!!!");
+
+    res.status(201).send("Notifi added!!!");
 }catch(error)
 {
     res.status(500).send(error);
